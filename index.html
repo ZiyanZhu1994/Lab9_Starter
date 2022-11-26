@@ -86,7 +86,14 @@
       <button>Trigger a Global Error</button>
     </section>
   </main>
-
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "efa741a82221494e8d7a238248e055c9"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +109,70 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    let logBtn = errorBtns[0];
+    logBtn.addEventListener('click', ()=>{console.log('Console log demo');});
+    let errBtn = errorBtns[1];
+    errBtn.addEventListener('click', ()=>{console.error('Console error demo');});
+    let countBtn = errorBtns[2];
+    countBtn.addEventListener('click', ()=>{console.count('button');});
+    let warnBtn = errorBtns[3];
+    warnBtn.addEventListener('click', ()=>{console.warn('Console warn botton');});
+    let assertBtn = errorBtns[4];
+    assertBtn.addEventListener('click', ()=>{console.assert(1 == 2, '1 is not equal to 2');});
+    let clearBtn = errorBtns[5];
+    clearBtn.addEventListener('click', ()=>{console.clear();});
+    let dirBtn = errorBtns[6];
+    dirBtn.addEventListener('click', ()=>{console.dir(dirBtn);});
+    let dirxmlBtn = errorBtns[7];
+    dirxmlBtn.addEventListener('click', ()=>{console.dirxml(dirxmlBtn);});
+    let groupBtn = errorBtns[8];
+    groupBtn.addEventListener('click', ()=>{console.group('console group');});
+    groupEndBtns = errorBtns[9];
+    groupEndBtns.addEventListener('click', ()=>{console.groupEnd();});
+    let tableData = [{name: 'Linear Algebra', num: 202,},{name: 'statistics', num:185,}];
+    let tableBtn = errorBtns[10];
+    tableBtn.addEventListener('click', ()=>{console.table(tableData);});
+    let timerBtn = errorBtns[11];
+    timerBtn.addEventListener('click', ()=>{console.time('Timer button');});
+    let timeEndBtn = errorBtns[12];
+    timeEndBtn.addEventListener('click', ()=>{console.timeEnd('Timer button');});
+    let traceBtn = errorBtns[13];
+    traceBtn.addEventListener('click', ()=>{
+      const handleBtnClick = ()=>{
+        deep();
+      }
+      const deep = ()=>{
+        deeper();
+      }
+      const deeper = ()=>{
+        deepest();
+      }
+      const deepest = ()=>{
+        console.trace();
+      }
+      handleBtnClick();
+    });
+
+    let globalErrBtns = errorBtns[14];
+    globalErrBtns.addEventListener('click', ()=>{
+      try {
+        if(Num == '') {
+          throw new ReferenceError('Incorrect number');
+        }
+        else {
+          console.log('No global error');
+        }
+      }
+      catch(error) {
+        console.log("Global error: incorrect number");
+      }
+      finally {
+        console.error(error);
+      }
+    });
+
+    TrackJS.track('Testing TrackJS!');
+    
   </script>
 </body>
 
